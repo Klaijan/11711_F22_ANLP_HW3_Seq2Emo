@@ -403,7 +403,8 @@ def main():
 
     from sklearn.model_selection import ShuffleSplit, KFold
 
-    kf = KFold(n_splits=args.folds, random_state=args.dev_split_seed, shuffle=True)
+    # kf = KFold(n_splits=args.folds, random_state=args.dev_split_seed, shuffle=True)
+    kf = KFold(n_splits=args.folds)
     # kf.get_n_splits(X_train_dev)
 
     all_preds = []
