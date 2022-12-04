@@ -35,8 +35,8 @@ def load_sem18_data():
     return X_train_dev, y_train_dev, X_test, y_test, EMOS, EMOS_DIC, 'sem18_split'
 
 
-def load_goemotions_data():
-    X_train_raw, y_train, X_dev_raw, y_dev, X_test_raw, y_test, emo_list = goemotion_data(file_path='data/goemotions')
+def load_goemotions_data(grouping=None):
+    X_train_raw, y_train, X_dev_raw, y_dev, X_test_raw, y_test, emo_list = goemotion_data(file_path='data/goemotions', grouping=grouping)
     X_train_dev_raw = X_train_raw + X_dev_raw
     y_train_dev = y_train + y_dev
     # preprocess

@@ -31,6 +31,7 @@ parser.add_argument('--en_lr', default=5e-4, type=float, help="encoder learning 
 parser.add_argument('--de_lr', default=1e-4, type=float, help="decoder learning rate")
 parser.add_argument('--loss', default='ce', type=str, help="loss function ce/focal")
 parser.add_argument('--dataset', default='sem18', type=str, choices=['sem18', 'goemotions'])
+parser.add_argument('--dataset_group', default=None, type=str, choices=[None, 'ekman', 'sentiment'])
 parser.add_argument('--en_dim', default=1200, type=int, help="dimension")
 parser.add_argument('--de_dim', default=400, type=int, help="dimension")
 parser.add_argument('--criterion', default='jaccard', type=str, choices=['jaccard', 'macro', 'micro', 'h_loss'])
@@ -123,7 +124,7 @@ if not os.path.isfile(data_pkl_path):
             load_sem18_data()
     elif args.dataset == 'goemotions':
         X_train_dev, y_train_dev, X_test, y_test, EMOS, EMOS_DIC, data_set_name = \
-            load_goemotions_data()
+            load_goemotions_data(args.dataset_group)
     else:
         raise NotImplementedError
 
@@ -402,7 +403,7 @@ def main():
 
     from sklearn.model_selection import ShuffleSplit, KFold
 
-    kf = KFold(n_splits=args.folds)
+    kf = KFold(n_splits=args.folds, random_state=args.dev_split_seed, shuffle=False)
     # kf.get_n_splits(X_train_dev)
 
     all_preds = []
