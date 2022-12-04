@@ -63,7 +63,7 @@ def get_emotion(file, emo_list, grouping=None, mapping=None):
                     emo_idx = int(emo)
                 one_label[emo_idx] = 1
                 label_list.append(one_label)
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     return text_list, label_list
 
 
